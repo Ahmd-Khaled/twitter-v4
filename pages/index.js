@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
+import { Sidebar } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,8 +14,14 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main>
-        <h1>First NextJS Project</h1>
+      <main className='flex min-h-screen max-w-7xl mx-auto'>
+        <Sidebar />
+
+        {/* Feed */}
+
+        {/* Widgets */}
+
+        {/* Modal */}
       </main>
     </>
   )

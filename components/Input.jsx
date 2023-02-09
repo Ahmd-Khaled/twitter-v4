@@ -5,8 +5,8 @@ import { UserImage } from ".";
 const Input = () => {
   return (
     <div className="flex border-b border-gray-200 p-3 space-x-3">
-      <div className="hoverEffect flex items-center justify-center">
-        <UserImage />
+      <div >
+        <UserImage srcImg='/imgs/ahmed-khaled.jpg' classes="hoverEffect h-16 w-16 rounded-full object-cover xl:mr-2" />
       </div>
       <div className="w-full divide-y divide-gray-200">
         <div className="">

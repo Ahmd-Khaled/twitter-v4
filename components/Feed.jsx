@@ -1,5 +1,6 @@
 import { MoonIcon, SparklesIcon, SunIcon } from "@heroicons/react/24/outline";
-import { Input } from ".";
+import { Input, Post } from ".";
+import { posts } from "./assets/posts";
 
 const Feed = () => {
   return (
@@ -12,6 +13,11 @@ const Feed = () => {
         </div>
       </div>
       <Input />
+      <div>
+        {posts.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+      </div>
     </div>
   )
 }

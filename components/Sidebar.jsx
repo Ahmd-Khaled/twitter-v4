@@ -27,7 +27,7 @@ const Sidebar = () => {
       </div>
       <button className="bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">Tweet</button>
       <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
-        <UserImage />
+        <UserImage srcImg='/imgs/ahmed-khaled.jpg' classes="hoverEffect h-16 w-16 rounded-full object-cover xl:mr-1" />
         <div className="leading-5 hidden xl:inline">
           <h4 className="font-bold">Ahmed Khaled</h4>
           <p className="text-gray-500">@ahmd.khaldd</p>

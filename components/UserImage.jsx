@@ -1,11 +1,12 @@
 import Image from "next/image"
 
-const UserImage = () => {
+const UserImage = ({ classes, srcImg }) => {
   return (
     <Image
-      src='/imgs/ahmed-khaled.jpg' alt='user-img'
+      src={srcImg} alt='user-img'
       width={40} height={40}
-      className='h-10 w-10 rounded-full object-cover xl:mr-2'
+      // fill
+      className={`${classes}`}
     />
   )
 }

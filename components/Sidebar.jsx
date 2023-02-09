@@ -1,6 +1,6 @@
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import Image from "next/image"
-import { SidebarMenuItem } from "./";
+import { SidebarMenuItem, UserImage } from "./";
 import { IconsList } from './assets/IconsList';
 
 
@@ -27,11 +27,7 @@ const Sidebar = () => {
       </div>
       <button className="bg-blue-400 text-white rounded-full w-56 h-12 font-bold shadow-md hover:brightness-95 text-lg hidden xl:inline">Tweet</button>
       <div className="hoverEffect text-gray-700 flex items-center justify-center xl:justify-start mt-auto">
-        <Image
-          src='/imgs/ahmed-khaled.jpg' alt='user-img'
-          width={40} height={40}
-          className='h-10 w-10 rounded-full object-cover xl:mr-2'
-        />
+        <UserImage />
         <div className="leading-5 hidden xl:inline">
           <h4 className="font-bold">Ahmed Khaled</h4>
           <p className="text-gray-500">@ahmd.khaldd</p>

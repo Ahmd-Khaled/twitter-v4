@@ -1,4 +1,5 @@
 import { MoonIcon, SparklesIcon, SunIcon } from "@heroicons/react/24/outline";
+import { Input } from ".";
 
 const Feed = () => {
   return (
@@ -10,6 +11,7 @@ const Feed = () => {
           {/* <MoonIcon className="h-5" /> */}
         </div>
       </div>
+      <Input />
     </div>
   )
 }

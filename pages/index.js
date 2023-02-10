@@ -5,7 +5,7 @@ import { Feed, Sidebar, Widgets } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home() {
+export default function Home({ newsResults }) {
   return (
     <>
       <Head>
@@ -14,13 +14,26 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className='flex min-h-screen max-w-7xl mx-auto'>
+      <main className='flex min-h-screen mx-auto'>
         <Sidebar />
         <Feed />
-        <Widgets />
+        <Widgets newsResults={newsResults.articles} />
 
         {/* Modal */}
       </main>
     </>
   )
 }
+
+
+export async function getServerSideProps() {
+  const newsResults = await fetch(
+    'https://saurav.tech/NewsAPI/top-headlines/category/business/us.json'
+  ).then((res) => res.json());
+
+  return {
+    props: {
+      newsResults,
+    },
+  };
+};

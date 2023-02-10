@@ -5,7 +5,7 @@ import { Feed, Sidebar, Widgets } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export default function Home({ newsResults }) {
+export default function Home({ newsResults, randomUsersResults }) {
   return (
     <>
       <Head>
@@ -17,7 +17,7 @@ export default function Home({ newsResults }) {
       <main className='flex min-h-screen mx-auto'>
         <Sidebar />
         <Feed />
-        <Widgets newsResults={newsResults.articles} />
+        <Widgets newsResults={newsResults.articles} randomUsersResults={randomUsersResults.results} />
 
         {/* Modal */}
       </main>
@@ -27,13 +27,20 @@ export default function Home({ newsResults }) {
 
 
 export async function getServerSideProps() {
+  // what's happening section
   const newsResults = await fetch(
     'https://saurav.tech/NewsAPI/top-headlines/category/business/us.json'
+  ).then((res) => res.json());
+
+  // who to follow section
+  const randomUsersResults = await fetch(
+    'https://randomuser.me/api/?results=30&inc=name,login,picture'
   ).then((res) => res.json());
 
   return {
     props: {
       newsResults,
+      randomUsersResults,
     },
   };
 };

@@ -6,13 +6,15 @@ export const IconsList = [
     id: 'Home',
     text: 'Home',
     icon: HomeIcon,
-    active: true
+    active: true,
+    public: true,
   },
   {
     id: 'Explore',
     text: 'Explore',
     icon: HashtagIcon,
-    active: false
+    active: false,
+    public: true,
   },
   {
     id: 'Notifications',
@@ -24,30 +26,35 @@ export const IconsList = [
     id: 'Messages',
     text: 'Messages',
     icon: EnvelopeIcon,
-    active: false
+    active: false,
+    public: false,
   },
   {
     id: 'Bookmarks',
     text: 'Bookmarks',
     icon: BookmarkIcon,
-    active: false
+    active: false,
+    public: false,
   },
   {
     id: 'Lists',
     text: 'Lists',
     icon: ClipboardIcon,
-    active: false
+    active: false,
+    public: false,
   },
   {
     id: 'Profile',
     text: 'Profile',
     icon: UserIcon,
-    active: false
+    active: false,
+    public: false,
   },
   {
     id: 'More',
     text: 'More',
     icon: EllipsisHorizontalCircleIcon,
-    active: false
+    active: false,
+    public: false,
   },
 ];

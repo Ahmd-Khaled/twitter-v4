@@ -1,8 +1,9 @@
 import Image from "next/image"
 
-const UserImage = ({ classes, srcImg }) => {
+const UserImage = ({ classes, srcImg, onClick }) => {
   return (
     <Image
+      onClick={onClick}
       src={srcImg} alt='user-img'
       width={40} height={40}
       // fill

@@ -1,6 +1,7 @@
+import Image from "next/image";
+import Moment from 'react-moment';
 import { ChartBarIcon, ChatBubbleOvalLeftEllipsisIcon, HeartIcon, ShareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
-import Image from "next/image";
 import { UserImage } from ".";
 
 
@@ -11,21 +12,24 @@ const Post = ({post}) => {
       {/* <div className="userImage mr-4">
         <UserImage srcImg={post.userImage} classes='h-11 w-11 rounded-full object-cover' />
       </div> */}
-        <UserImage srcImg={post.userImage} classes='h-11 w-11 rounded-full object-cover mr-4' />
+      {/* <img src={post.data().userImg} alt='' classes='h-11 w-11 rounded-full mr-4' /> */}
+      <UserImage srcImg={post.data().userImg} classes='h-11 w-11 rounded-full object-cover mr-4' />
       <div className="postContent">
         <div className="postHead flex items-center justify-between">
           <div className="postHeadLeft flex items-center space-x-1 whitespace-nowrap">
-            <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">{post.name}</h4>
-            <span className="text-sm sm:text-[15px]">@{post.username} - </span>
-            <span className="text-sm sm:text-[15px] hover:underline">{post.timestamp}</span>
+            <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">{post.data().name}</h4>
+            <span className="text-sm sm:text-[15px]">@{post.data().username} - </span>
+            <span className="text-sm sm:text-[15px] hover:underline">
+              <Moment fromNow>{post?.timestamp?.toDate()}</Moment>
+            </span>
           </div>
           <EllipsisHorizontalIcon className="h-10 hoverEffect w-10 hover:bg-sky-200 hover:text-sky-500 p-2" />
         </div>
         <div className="postText">
-          <p className="text-gray-800 text-[15px] sm:text-[16px] mb-2">{post.text}</p>
+          <p className="text-gray-800 text-[15px] sm:text-[16px] mb-2">{post.data().text}</p>
         </div>
         <div className="postImage">
-          <Image className="rounded-2xl" src={post.img} alt={post.img} width={520} height={400} />
+          <Image className="rounded-2xl" src={post.data().image} alt='' width={520} height={400} />
         </div>
         <div className="postIcons flex justify-between items-center text-gray-500 p-2">
           <ChatBubbleOvalLeftEllipsisIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />

@@ -1,13 +1,14 @@
+import { useEffect, useState } from "react";
+import Moment from 'react-moment';
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
-import Moment from 'react-moment';
 import { collection, deleteDoc, doc, onSnapshot, setDoc } from "firebase/firestore";
-import { db } from "@/firebase";
+import { db, storage } from "@/firebase";
+import { deleteObject, ref } from "firebase/storage";
 import { ChartBarIcon, ChatBubbleOvalLeftEllipsisIcon, HeartIcon, ShareIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { HeartIcon as HeartIconFilled } from "@heroicons/react/24/solid";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import { UserImage } from ".";
-import { useEffect, useState } from "react";
 
 
 const Post = ({ post }) => {
@@ -38,7 +39,13 @@ const Post = ({ post }) => {
     } else {
       signIn();
     };
+  };
 
+  const deletePost = async () => {
+    if (window.confirm('Are you sure you want to delete this post?')) {
+        deleteDoc(doc(db, 'posts', post.id));
+        deleteObject(ref(storage, `posts/${post.id}/image`));
+    }
   };
   
   return (
@@ -68,7 +75,11 @@ const Post = ({ post }) => {
         </div>
         <div className="postIcons flex justify-between items-center text-gray-500 p-2">
           <ChatBubbleOvalLeftEllipsisIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
-          <TrashIcon className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />
+
+          {session?.user.uid === post?.data().id && 
+            <TrashIcon onClick={deletePost} className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />
+          }
+
           <div className="flex items-center w-11">
             {hasLiked
               ?<HeartIconFilled onClick={likePost} className="h-9 w-9 hoverEffect p-2 text-red-600 hover:bg-red-100" />
@@ -76,7 +87,9 @@ const Post = ({ post }) => {
             }
             {likes.length > 0 && <span className={`${hasLiked && 'text-red-600'} text-sm select-none`}>{likes.length}</span>}
           </div>
+
           <ShareIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+
           <ChartBarIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
         </div>
       </div>

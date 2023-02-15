@@ -43,8 +43,10 @@ const Post = ({ post }) => {
 
   const deletePost = async () => {
     if (window.confirm('Are you sure you want to delete this post?')) {
-        deleteDoc(doc(db, 'posts', post.id));
+      deleteDoc(doc(db, 'posts', post.id));
+      if (post.data().image) {
         deleteObject(ref(storage, `posts/${post.id}/image`));
+      }
     }
   };
   
@@ -71,7 +73,8 @@ const Post = ({ post }) => {
           <p className="text-gray-800 text-[15px] sm:text-[16px] mb-2">{post.data().text}</p>
         </div>
         <div className="postImage">
-          <Image className="rounded-2xl" src={post.data().image} alt='' width={520} height={400} />
+          {/* <Image className="rounded-2xl" src={post.data().image} alt='' width={520} height={400} /> */}
+          <img className="rounded-2xl" src={post.data().image} alt='' width='100%' />
         </div>
         <div className="postIcons flex justify-between items-center text-gray-500 p-2">
           <ChatBubbleOvalLeftEllipsisIcon className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />

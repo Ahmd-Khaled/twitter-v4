@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from '@next/font/google'
-import { Feed, Sidebar, Widgets } from '@/components'
+import { CommentModal, Feed, Sidebar, Widgets } from '@/components'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -18,8 +18,7 @@ export default function Home({ newsResults, randomUsersResults }) {
         <Sidebar />
         <Feed />
         <Widgets newsResults={newsResults.articles} randomUsersResults={randomUsersResults.results} />
-
-        {/* Modal */}
+        <CommentModal />
       </main>
     </>
   )

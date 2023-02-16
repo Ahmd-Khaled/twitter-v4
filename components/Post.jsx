@@ -11,14 +11,16 @@ import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import { UserImage } from ".";
 
 import { useRecoilState } from 'recoil';
-import { modalState } from '../atom/modalAtom';
+import { modalState, postIdState } from '../atom/modalAtom';
 
 
 const Post = ({ post }) => {
-  const [open, setOpen] = useRecoilState(modalState);
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
+
+  const [open, setOpen] = useRecoilState(modalState);
+  const [postId, setPostId] = useRecoilState(postIdState);
 
   useEffect(() => {
     const unsubscribe = onSnapshot(
@@ -53,6 +55,15 @@ const Post = ({ post }) => {
       }
     }
   };
+
+  const commentToPost = () => {
+    if (!session) {
+      signIn();
+    } else {
+      setPostId(post.id);
+      setOpen(!open);
+    }
+  };
   
   return (
     <div className="flex p-3 cursor-pointer border-b border-gray-200">
@@ -81,7 +92,7 @@ const Post = ({ post }) => {
           <img className="rounded-2xl" src={post.data().image} alt='' width='100%' />
         </div>
         <div className="postIcons flex justify-between items-center text-gray-500 p-2">
-          <ChatBubbleOvalLeftEllipsisIcon onClick={() => setOpen(!open)} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <ChatBubbleOvalLeftEllipsisIcon onClick={commentToPost} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
 
           {session?.user.uid === post?.data().id && 
             <TrashIcon onClick={deletePost} className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />

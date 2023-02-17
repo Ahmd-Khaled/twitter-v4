@@ -7,3 +7,4 @@ export { default as Post } from './Post';
 export { default as Widgets } from './Widgets';
 export { default as News } from './News';
 export { default as CommentModal } from './CommentModal';
+export { default as FeedComment } from './FeedComment';

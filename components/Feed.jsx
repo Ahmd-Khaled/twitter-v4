@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { db } from "@/firebase";
-import { MoonIcon, SparklesIcon, SunIcon } from "@heroicons/react/24/outline";
+import { SunIcon } from "@heroicons/react/24/outline";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Input, Post } from ".";
 import { AnimatePresence, motion } from "framer-motion";
-// import { posts } from "./assets/posts";
 
 const Feed = () => {
   const [posts, setPosts] = useState([]);
@@ -38,7 +37,7 @@ const Feed = () => {
               exit={{ opacity: 0 }}
               transition={{ duration: 1}}
             >
-              <Post key={post.id} post={post} 
+              <Post key={post.id} id={post.id} post={post} 
             />
             </motion.div>
           ))}

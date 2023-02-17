@@ -17,6 +17,7 @@ import { modalState, postIdState } from '../atom/modalAtom';
 const Post = ({ post }) => {
   const { data: session } = useSession();
   const [likes, setLikes] = useState([]);
+  const [comments, setComments] = useState([]);
   const [hasLiked, setHasLiked] = useState(false);
 
   const [open, setOpen] = useRecoilState(modalState);
@@ -26,6 +27,13 @@ const Post = ({ post }) => {
     const unsubscribe = onSnapshot(
       collection(db, 'posts', post.id, 'likes'),
       (snapshot) => setLikes(snapshot.docs)
+    );
+  }, [db]);
+
+  useEffect(() => {
+    const unsubscribe = onSnapshot(
+      collection(db, 'posts', post.id, 'comments'),
+      (snapshot) => setComments(snapshot.docs)
     );
   }, [db]);
 
@@ -73,7 +81,7 @@ const Post = ({ post }) => {
       </div> */}
       {/* <img src={post.data().userImg} alt='' classes='h-11 w-11 rounded-full mr-4' /> */}
       <UserImage srcImg={post.data().userImg} classes='h-11 w-11 rounded-full object-cover mr-4' />
-      <div className="postContent">
+      <div className="postContent flex-1">
         <div className="postHead flex items-center justify-between">
           <div className="postHeadLeft flex items-center space-x-1 whitespace-nowrap">
             <h4 className="font-bold text-[15px] sm:text-[16px] hover:underline">{post.data().name}</h4>
@@ -92,7 +100,10 @@ const Post = ({ post }) => {
           <img className="rounded-2xl" src={post.data().image} alt='' width='100%' />
         </div>
         <div className="postIcons flex justify-between items-center text-gray-500 p-2">
-          <ChatBubbleOvalLeftEllipsisIcon onClick={commentToPost} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+          <div className="flex items-center w-11">
+            <ChatBubbleOvalLeftEllipsisIcon onClick={commentToPost} className="h-9 w-9 hoverEffect p-2 hover:text-sky-500 hover:bg-sky-100" />
+            {comments.length > 0 && <span className='text-sm select-none'>{comments.length}</span>}
+          </div>
 
           {session?.user.uid === post?.data().id && 
             <TrashIcon onClick={deletePost} className="h-9 w-9 hoverEffect p-2 hover:text-red-600 hover:bg-red-100" />

@@ -46,7 +46,12 @@ const FeedComment = () => {
       <div>
         {comments.length > 0 && (
           comments?.map((comment) => (
-            <Comment key={comment.id} id={comment.id} comment={comment?.data()} />
+            <Comment
+              key={comment.id}
+              commentId={comment.id}
+              originalPostId={id}
+              comment={comment?.data()} 
+            />
           ))
         )}
       </div>

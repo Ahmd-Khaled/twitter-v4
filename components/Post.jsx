@@ -96,10 +96,10 @@ const Post = ({ post, id }) => {
           </div>
           <EllipsisHorizontalIcon className="h-10 hoverEffect w-10 hover:bg-sky-200 hover:text-sky-500 p-2" />
         </div>
-        <div className="postText">
+        <div onClick={() => router.push(`/posts/${id}`)} className="postText">
           <p className="text-gray-800 text-[15px] sm:text-[16px] mb-2">{post?.data()?.text}</p>
         </div>
-        <div className="postImage">
+        <div onClick={() => router.push(`/posts/${id}`)} className="postImage">
           {/* <Image className="rounded-2xl" src={post?.data()?.image} alt='' width={520} height={400} /> */}
           <img className="rounded-2xl" src={post?.data()?.image} alt='' width='100%' />
         </div>

@@ -4,7 +4,7 @@ import { ArrowLeftIcon, SunIcon } from "@heroicons/react/24/outline";
 import { collection, doc, onSnapshot, orderBy, query } from "firebase/firestore";
 import { Post, Comment } from ".";
 import { useRouter } from "next/router";
-
+import { AnimatePresence, motion } from "framer-motion";
 
 const FeedComment = () => {
   const router = useRouter();
@@ -45,14 +45,24 @@ const FeedComment = () => {
       <Post id={id} post={post} />
       <div>
         {comments.length > 0 && (
-          comments?.map((comment) => (
-            <Comment
-              key={comment.id}
-              commentId={comment.id}
-              originalPostId={id}
-              comment={comment?.data()} 
-            />
-          ))
+          <AnimatePresence>
+            {comments?.map((comment) => (
+              <motion.div
+                key={comment.id}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 1}}
+              >
+                <Comment
+                  key={comment.id}
+                  commentId={comment.id}
+                  originalPostId={id}
+                  comment={comment?.data()}
+                />
+              </motion.div>
+            ))}
+          </AnimatePresence>
         )}
       </div>
     </div>
